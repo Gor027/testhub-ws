@@ -6,11 +6,17 @@ import java.sql.SQLException;
 
 abstract public class BaseDao {
 
+    private Connection conn;
 
+    public BaseDao() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db", "root", "");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-    protected Connection connectingDatabase() throws SQLException {
-
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db", "root", "");
+    protected Connection getConnection() throws SQLException {
         return conn;
     }
 

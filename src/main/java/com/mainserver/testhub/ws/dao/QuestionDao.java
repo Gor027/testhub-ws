@@ -16,7 +16,7 @@ public class QuestionDao extends BaseDao{
 
     public List<Question> getAllQuestions() throws SQLException{
 
-        PreparedStatement ps = connectingDatabase().prepareStatement("SELECT * FROM questions");
+        PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM questions");
         ResultSet rs = ps.executeQuery();
 
         ArrayList<Question> questions = new ArrayList<Question>();
@@ -34,7 +34,7 @@ public class QuestionDao extends BaseDao{
 
     public Question getQuestionByID(int id) throws SQLException {
 
-        PreparedStatement ps = connectingDatabase().prepareStatement("SELECT * FROM questions WHERE QuestionID = ?");
+        PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM questions WHERE QuestionID = ?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
@@ -56,14 +56,14 @@ public class QuestionDao extends BaseDao{
         System.out.println("Write the new question... ");
         String newQuestion = in.nextLine();
 
-        PreparedStatement ps = connectingDatabase().prepareStatement("INSERT INTO questions (Question)" + "VALUES (?)");
+        PreparedStatement ps = getConnection().prepareStatement("INSERT INTO questions (Question)" + "VALUES (?)");
         ps.setString(1, newQuestion);
         ps.executeUpdate();
     }
 
     public void deleteQuestion(int id) throws SQLException{
 
-        PreparedStatement ps = connectingDatabase().prepareStatement("DELETE FROM questions WHERE QuestionID = ?");
+        PreparedStatement ps = getConnection().prepareStatement("DELETE FROM questions WHERE QuestionID = ?");
         ps.setInt(1, id);
         ps.executeUpdate();
 
